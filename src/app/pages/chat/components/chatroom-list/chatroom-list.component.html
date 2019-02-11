@@ -1,0 +1,17 @@
+<div class="h-100 d-flex flex-column chatroom-list">
+  <ng-container *ngFor="let chatroom of chatroomService.chatrooms | async">
+    <div class="chatroom-list-item">
+      <a [routerLink]="['/chat', chatroom.id]" [queryParams]="{type: 'PUBLIC'}">{{ chatroom.name }}</a>
+    </div>
+  </ng-container>
+  <ng-container *ngFor="let chatroom of privateChats  ">
+      <div class="chatroom-list-item">
+        <ng-container *ngIf="chatroom.user2 != currentUser.id" >
+        <a [routerLink]="['/chat', chatroom.id]" [queryParams]="{type: 'PRIVATE'}">{{ chatroom.userName2 }}</a>
+        </ng-container>
+        <ng-container *ngIf="chatroom.userName1.id != currentUser.id" >
+            <a [routerLink]="['/chat', chatroom.id]" [queryParams]="{type: 'PRIVATE'}">{{chatroom.userName1.firstName}}</a>
+            </ng-container>
+      </div>
+    </ng-container>
+</div>
